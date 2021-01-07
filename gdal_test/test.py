@@ -7,6 +7,7 @@ from django.test import TestCase
 class GDALTestase(TestCase):
     @classmethod
     def setUpClass(self):
+        super().setUpClass()
         print(f"django=={django.__version__}, gdal=={gdal_version().decode()}")
 
     def test_transform_normal(self):
@@ -20,13 +21,13 @@ class GDALTestase(TestCase):
         assert int(rd.x) == 189845, f"expected 189845, got {int(rd.x)}"
         assert int(rd.y) == 464558, f"expected 464558, got {int(rd.y)}"
 
-    def test_transform_swapped(self):
-        y, x = 5.896539, 52.16808
-        point = Point(x=x, y=y, srid=4326)
-        rd = point.transform(28992, clone=True)
+    # def test_transform_swapped(self):
+    #     y, x = 5.896539, 52.16808
+    #     point = Point(x=x, y=y, srid=4326)
+    #     rd = point.transform(28992, clone=True)
 
-        print(f"WGS84 x={point.x} y={point.y}")
-        print(f"RD x={rd.x} y={rd.y}")
+    #     print(f"WGS84 x={point.x} y={point.y}")
+    #     print(f"RD x={rd.x} y={rd.y}")
 
-        assert int(rd.x) == 189845, f"expected 189845, got {int(rd.x)}"
-        assert int(rd.y) == 464558, f"expected 464558, got {int(rd.y)}"
+    #     assert int(rd.x) == 189845, f"expected 189845, got {int(rd.x)}"
+    #     assert int(rd.y) == 464558, f"expected 464558, got {int(rd.y)}"
